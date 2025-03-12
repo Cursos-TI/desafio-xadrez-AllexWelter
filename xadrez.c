@@ -1,34 +1,28 @@
 #include <stdio.h>
 
 
-int main(){
-
-    int bispo = 1;
-    int rainha = 1;
-    int cavalo;
-    
-    printf("\nBispo:\n");  //Imprime o nome da peça a ser movimentada
-    while (bispo <= 5){ // mover diagonalmente o bispo 5 vezes
-        printf("Cima, Direita\n"); //Imprime a direção do movimento
-
-        bispo++;
+void moverRainha(int casas) { // declaração da variável com recursividade 
+    if(casas > 0){ //Lógica para calcular movimentos, controlada por caso-base(condição base)
+        printf("Esquerda\n");
+        moverRainha(casas - 1); // chama a si mesma com casas - 1
     }
+}
 
-    printf("\nRainha:\n"); //Imprime o nome da peça a ser movimentada
-    do
-    {
-       printf("Esquerda\n");  //Imprime a direção do movimento
-       rainha++;
-
-    } while (rainha <= 8); // mover para a esquerda a rainha 8 vezes
-    
-    printf("\nTorre:\n"); //Imprime o nome da peça a ser movimentada
-    for(int torre = 1; torre <= 5; torre++) // mover a torre para a direita 5 vezes
-    {
-        printf("Direita\n");  //Imprime a direção do movimento
+void moverTorre(int casas) { // declaração da variável com recursividade 
+    if(casas > 0){ //Lógica para calcular movimentos, controlada por caso-base(condição base)
+        printf("Direita\n");
+        moverTorre(casas -1); // chama a si mesma com casas - 1
     }
+}
 
-    printf("\nCavalo:\n"); //Imprime o nome da peça a ser movimentada
+void moverBispo(int casas){ // declaração da variável com recursividade 
+    if(casas > 0){ //Lógica para calcular movimentos, controlada por caso-base(condição base)
+        printf("Cima, Direita\n");
+        moverBispo(casas -1); // chama a si mesma com casas - 1        
+    }
+}
+
+void moverCavalo(int cavalo){
     for(cavalo = 1; cavalo <= 2; cavalo++){ // mover o cavalo para cima 2 vezes
 
         printf("Cima\n"); //Imprime a direção do movimento
@@ -37,9 +31,24 @@ int main(){
     {
         printf("Direita\n"); //Imprime a direção do movimento
         break;
-    }
+    }    
+}
+
+int main(){
+   
+    int cavalo;
     
+    printf("\nBispo:\n");
+    moverBispo(5); // chamada recursiva
 
+    printf("\nRainha:\n");
+    moverRainha(8); // chamada recursiva
 
+    printf("\nTorre:\n");
+    moverTorre(5); // chamada recursiva
+
+    printf("\nCavalo:\n");
+    moverCavalo(1); // chamada recursiva
+    
     return 0;
 }
